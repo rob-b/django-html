@@ -78,7 +78,10 @@ class FieldNode(template.Node):
         # intercept this to manipulate the attributes - so we have to 
         # duplicate the logic from as_widget here.
         widget = field.field.widget
-        attrs = self.extra_attrs or {}
+        if self.extra_attrs:
+            attrs = self.extra_attrs.copy()
+        else:
+            attrs = {}
         auto_id = field.auto_id
         if auto_id and 'id' not in attrs and 'id' not in widget.attrs:
             attrs['id'] = auto_id
