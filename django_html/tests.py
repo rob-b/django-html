@@ -131,3 +131,11 @@ class FieldTest(TemplateTestHelper):
             {'form': MyForm()},
             {'name': 'select', 'class': 'foo', 'id': 'hi'}
         )
+        self.assertHasAttrs(
+            '{% load html %}{% doctype "html4" silent %}' +
+            '{% for elem in form %}' +
+            '{% field elem class="foo" %}' +
+            '{% endfor %}',
+            {'form': MyForm()},
+            {'name': 'select', 'class': 'foo', 'id': 'id_select'}
+        )
